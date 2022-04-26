@@ -121,6 +121,7 @@ def findBest(N): #greedy descent
     #print('\nCUR MIN ', M)
     for c in E:
         for r in range(len(E[c])): #trickniess ahead so r is the index of the row not the value ie row1 = 0
+
             if(E[c][r]<M):    #new low found
                 M = E[c][r]   #what is that low
                 #print('\nNEW MIN ', M)
@@ -149,7 +150,7 @@ def modify(N):
             while (r <= N):
                 V[r] = random.choice(dom) 
                 r+=1
-            print("Restart WORLD\n\n")
+            #print("Restart WORLD\n\n")
             h = heuristic(V, N)
             for a in h:
                err+= h[a]#summ total error
@@ -167,7 +168,7 @@ def doLocalSearch(N):
         while (r <= N):
             V[r] = random.choice(dom) 
             r+=1
-        print("Restart WORLD\n")
+        #print("Restart WORLD\n")
         h = heuristic(V, N)
         for a in h:
            err+= h[a]#summ total error
@@ -177,7 +178,7 @@ def doLocalSearch(N):
                 break
             else:
                 modify(N)
-                print("NEW WORLD\n")
+                #print("NEW WORLD\n")
 
         if(heuristic(V, N) == solution):
             break
@@ -190,5 +191,36 @@ def doLocalSearch(N):
 
 
 #driver
-initVdom(case['3'])
-doLocalSearch(case['3'])
+t= 0
+trials = 1
+t += timeit.timeit(lambda: initVdom(case['1']), number=1)
+t += timeit.timeit(lambda: doLocalSearch(case['1']), number=1)
+print("N = 4 takes... " , t)
+t=0
+t += timeit.timeit(lambda: initVdom(case['2']), number=trials)
+t += timeit.timeit(lambda: doLocalSearch(case['2']), number=trials)
+print("N = 8 takes... " , t)
+t=0
+t += timeit.timeit(lambda: initVdom(case['3']), number=trials)
+t += timeit.timeit(lambda: doLocalSearch(case['3']), number=trials)
+print("N = 16 takes... " , t)
+t=0
+t += timeit.timeit(lambda:initVdom(case['4']), number=trials)
+t += timeit.timeit(lambda: doLocalSearch(case['4']), number=trials)
+print("N = 64 takes... " , t)
+t=0
+t += timeit.timeit(lambda: initVdom(case['5']), number=trials)
+t += timeit.timeit(lambda: doLocalSearch(case['5']), number=trials)
+print("N = 100 takes... " , t)
+t=0
+t += timeit.timeit(lambda: initVdom(case['6']), number=trials)
+t += timeit.timeit(lambda: doLocalSearch(case['6']), number=trials)
+print("N = 1000 takes... " , t)
+t=0
+t += timeit.timeit(lambda: initVdom(case['7']), number=trials)
+t += timeit.timeit(lambda: doLocalSearch(case['7']), number=trials)
+print("N = 10000 takes... " , t)
+t=0
+t += timeit.timeit(lambda: initVdom(case['8']), number=trials)
+t += timeit.timeit(lambda: doLocalSearch(case['8']), number=trials)
+print("N = 100000 takes... " , t)
